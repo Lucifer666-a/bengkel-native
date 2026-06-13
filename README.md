@@ -20,14 +20,15 @@ Ikuti langkah-langkah di bawah ini secara berurutan agar web bisa berjalan tanpa
 1. Clone atau download repositori ini dari GitHub.
 2. Letakkan folder project ini (`[Nama_Folder_Bengkel_Kamu]`) ke dalam direktori XAMPP kamu, biasanya di:
 ```text
-   C:\xampp\htdocs\ ```
+   C:\xampp\htdocs\
+   ```
 
 ### 2. Menyalakan Server Lokal
 Buka aplikasi XAMPP Control Panel.
 
 Klik tombol Start pada modul Apache dan MySQL sampai indikatornya berwarna hijau.
 
-3. Impor Database ke phpMyAdmin
+### 3. Impor Database ke phpMyAdmin
 Buka browser kamu, lalu akses ke alamat: http://localhost/phpmyadmin/
 
 Buat database baru dengan mengklik menu New di panel sebelah kiri.
@@ -42,7 +43,7 @@ Klik Choose File, lalu cari dan pilih file database [nama_file_database_kamu].sq
 
 Gulung ke bawah, lalu klik tombol Import (atau Go). Tunggu sampai muncul notifikasi sukses.
 
-4. Menjalankan Aplikasi Web
+### 4. Menjalankan Aplikasi Web
 Buka tab baru di browser kamu.
 
 Akses aplikasi web dengan mengetikkan alamat URL berikut:
