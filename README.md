@@ -20,9 +20,9 @@ Ikuti langkah-langkah di bawah ini secara berurutan agar web bisa berjalan tanpa
 1. Clone atau download repositori ini dari GitHub.
 2. Letakkan folder project ini (`[Nama_Folder_Bengkel_Kamu]`) ke dalam direktori XAMPP kamu, biasanya di:
 ```text
-   C:\xampp\htdocs\```
+   C:\xampp\htdocs\ ```
 
-2. Menyalakan Server Lokal
+### 2. Menyalakan Server Lokal
 Buka aplikasi XAMPP Control Panel.
 
 Klik tombol Start pada modul Apache dan MySQL sampai indikatornya berwarna hijau.
