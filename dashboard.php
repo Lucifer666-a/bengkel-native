@@ -1,19 +1,19 @@
 <?php
-// Mengikutkan header.php untuk proteksi session & koneksi database
+
 include 'components/header.php';
 
-// Ambil tanggal hari ini secara dinamis
+
 $hari_ini = date('Y-m-d');
 
-// 1. Hitung motor yang sedang mengantre hari ini (Menggunakan tanggal_servis & status_servis)
+
 $q_antre = mysqli_query($conn, "SELECT COUNT(*) as total FROM table_servis WHERE tanggal_servis = '$hari_ini' AND status_servis = 'Antre'");
 $data_antre = mysqli_fetch_assoc($q_antre);
 
-// 2. Hitung motor yang sedang diproses hari ini (Menggunakan tanggal_servis & status_servis)
+
 $q_proses = mysqli_query($conn, "SELECT COUNT(*) as total FROM table_servis WHERE tanggal_servis = '$hari_ini' AND status_servis = 'Diproses'");
 $data_proses = mysqli_fetch_assoc($q_proses);
 
-// 3. Hitung motor yang sudah selesai hari ini (Menggunakan tanggal_servis & status_servis)
+
 $q_selesai = mysqli_query($conn, "SELECT COUNT(*) as total FROM table_servis WHERE tanggal_servis = '$hari_ini' AND status_servis = 'Selesai'");
 $data_selesai = mysqli_fetch_assoc($q_selesai);
 ?>
@@ -39,7 +39,7 @@ $data_selesai = mysqli_fetch_assoc($q_selesai);
                     <p class="text-gray-600 mt-1">Selamat datang kembali, <span class="font-semibold text-blue-600"><?= $_SESSION['nama_user']; ?></span>!</p>
                 </div>
                 <div class="text-sm bg-white border border-gray-200 px-4 py-2 rounded-xl shadow-sm font-medium text-gray-700">
-                    📅 <?= date('d M Y'); ?>
+                     <?= date('d M Y'); ?>
                 </div>
             </header>
 

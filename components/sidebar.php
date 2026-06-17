@@ -1,5 +1,4 @@
 <?php
-// Mengambil nama file yang sedang dibuka untuk mengatur menu "active"
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 

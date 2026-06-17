@@ -83,17 +83,17 @@ if (isset($_GET['cari'])) {
             
             <header class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-800">Data Pelanggan & Kendaraan</h1>
-                <p class="text-gray-600 mt-1">Langkah A: Cari atau daftarkan pelanggan baru yang datang ke bengkel.</p>
+                <p class="text-gray-600 mt-1">Cari atau daftarkan pelanggan baru yang datang ke bengkel.</p>
             </header>
 
             <?php if (!empty($notif_sukses)) : ?>
                 <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded shadow-sm font-medium text-sm">
-                    ✅ <?= $notif_sukses; ?>
+                     <?= $notif_sukses; ?>
                 </div>
             <?php endif; ?>
             <?php if (!empty($notif_gagal)) : ?>
                 <div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded shadow-sm font-medium text-sm">
-                    ❌ <?= $notif_gagal; ?>
+                     <?= $notif_gagal; ?>
                 </div>
             <?php endif; ?>
 
@@ -194,7 +194,7 @@ if (isset($_GET['cari'])) {
                                                 <a href="pelanggan.php?aksi=hapus_pelanggan&id=<?= $row['id_pelanggan']; ?>" 
                                                 onclick="return confirm('Hapus pelanggan ini? Data kendaraan mereka juga akan ikut terhapus!')"
                                                 class="inline-block bg-red-50 text-red-600 hover:bg-red-600 hover:text-white font-semibold px-3 py-1.5 rounded-lg text-xs transition shadow-sm">
-                                                    🗑️ Hapus
+                                                    - Hapus
                                                 </a>
                                             </td>
                                         </tr>

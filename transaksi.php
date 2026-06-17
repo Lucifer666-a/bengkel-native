@@ -16,7 +16,7 @@ if (isset($_POST['tambah_antrean'])) {
                     VALUES ('$id_kendaraan', '$hari_ini', '$keluhan', 'Antre', 0)";
     
     if (mysqli_query($conn, $query_input)) {
-        $notif = "<div class='mb-4 p-3 bg-green-100 text-green-700 rounded-xl text-sm font-medium'>✅ Antrean baru berhasil ditambahkan!</div>";
+        $notif = "<div class='mb-4 p-3 bg-green-100 text-green-700 rounded-xl text-sm font-medium'> Antrean baru berhasil ditambahkan!</div>";
         // Reset pilihan setelah sukses input
         $id_kendaraan_pilihan = "";
     }
@@ -162,7 +162,7 @@ if (isset($_POST['servis_selesai'])) {
                                                         Proses Mekanik
                                                     </a>
                                                     <a href="transaksi.php?aksi=hapus_servis&id=<?= $s['id_servis']; ?>" onclick="return confirm('Batalkan antrean servis ini?')" class="block w-full bg-red-50 text-red-600 hover:bg-red-600 hover:text-white text-xs px-3 py-1.5 rounded-lg font-medium transition text-center">
-                                                        ❌ Batalkan
+                                                         Batalkan
                                                     </a>
                                                 <?php elseif($s['status_servis'] == 'Diproses'): ?>
                                                     <button onclick="bukaModal(<?= $s['id_servis']; ?>)" class="w-full bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition shadow-sm">
@@ -170,7 +170,7 @@ if (isset($_POST['servis_selesai'])) {
                                                     </button>
                                                 <?php else: ?>
                                                     <a href="cetak_nota.php?id=<?= $s['id_servis']; ?>" target="_blank" class="w-full border border-gray-300 hover:bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium transition inline-flex items-center justify-center gap-1">
-                                                        🖨️ Nota
+                                                         Cetak Nota
                                                     </a>
                                                 <?php endif; ?>
                                             </td>

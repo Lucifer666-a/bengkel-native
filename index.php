@@ -1,11 +1,11 @@
 <?php
-// Mulai session
+
 session_start();
 
-// Hubungkan ke koneksi database
+
 include 'config/koneksi.php';
 
-// Jika user sudah login sebelumnya, langsung lempar ke dashboard tanpa harus login lagi
+
 if (isset($_SESSION['user_logged'])) {
     header("Location: dashboard.php");
     exit;
@@ -13,26 +13,24 @@ if (isset($_SESSION['user_logged'])) {
 
 $error_message = "";
 
-// Logika ketika tombol Login ditekan
+
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
 
-    // Cari user berdasarkan username di table_user
+
     $query = mysqli_query($conn, "SELECT * FROM table_user WHERE username = '$username'");
     
     if (mysqli_num_rows($query) === 1) {
         $row = mysqli_fetch_assoc($query);
         
-        // Verifikasi password (menggunakan password_verify agar aman)
+        
         if ($password == $row['password']) {
-            // Set session jika login berhasil
             $_SESSION['user_logged'] = true;
             $_SESSION['id_user']     = $row['id_user'];
             $_SESSION['username']    = $row['username'];
             $_SESSION['nama_user']   = $row['nama_lengkap'];
 
-            // Alihkan ke halaman dashboard
             header("Location: dashboard.php");
             exit;
         } else {
