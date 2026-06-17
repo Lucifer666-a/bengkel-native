@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2026 at 04:37 AM
+-- Generation Time: Jun 17, 2026 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,9 +40,8 @@ CREATE TABLE `table_kendaraan` (
 --
 
 INSERT INTO `table_kendaraan` (`id_kendaraan`, `id_pelanggan`, `no_plat`, `merk_tipe`, `tahun_keluaran`) VALUES
-(2, 3, 'BM2120JAF', 'megapro', '2026'),
-(3, 4, 'BH5678JHG', 'nmax', '2026'),
-(4, 5, 'B4567HGF', 'vario', '2026');
+(5, 6, 'AOFLA', '2345', '2026'),
+(6, 7, 'FIHR0343', 'saflk', '2026');
 
 -- --------------------------------------------------------
 
@@ -53,18 +52,16 @@ INSERT INTO `table_kendaraan` (`id_kendaraan`, `id_pelanggan`, `no_plat`, `merk_
 CREATE TABLE `table_pelanggan` (
   `id_pelanggan` int(11) NOT NULL,
   `nama_pelanggan` varchar(25) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
-  `alamat` text NOT NULL
+  `no_hp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `table_pelanggan`
 --
 
-INSERT INTO `table_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_hp`, `alamat`) VALUES
-(3, 'sdfgg', '0987654', ''),
-(4, 'vbnm', '9876543', ''),
-(5, 'bngfc ', '9876556', '');
+INSERT INTO `table_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_hp`) VALUES
+(6, 'ewgihkfj', '2345'),
+(7, 'asflk', '203948');
 
 -- --------------------------------------------------------
 
@@ -77,7 +74,7 @@ CREATE TABLE `table_servis` (
   `id_kendaraan` int(11) NOT NULL,
   `tanggal_servis` date NOT NULL,
   `keluhan` text NOT NULL,
-  `tindakan_mekanik` text NOT NULL,
+  `tindakan_mekanik` text DEFAULT NULL,
   `status_servis` enum('Antre','Diproses','Selesai') NOT NULL,
   `total_biaya` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -87,9 +84,8 @@ CREATE TABLE `table_servis` (
 --
 
 INSERT INTO `table_servis` (`id_servis`, `id_kendaraan`, `tanggal_servis`, `keluhan`, `tindakan_mekanik`, `status_servis`, `total_biaya`) VALUES
-(2, 2, '2026-06-13', 'bghjmnbvgh', 'fghjklkmnbvcc', 'Selesai', 2345678),
-(3, 4, '2026-06-13', 'ngfghj', 'ojihpfvajl', 'Selesai', 549999),
-(4, 3, '2026-06-13', 'jalskhf', 'lrkwhq', 'Selesai', 123212);
+(6, 5, '2026-06-17', 'gfgjhkk', NULL, 'Antre', 0),
+(9, 6, '2026-06-17', 'gxfhcgjkjl', 'ghvj,,', 'Selesai', 865567);
 
 -- --------------------------------------------------------
 
@@ -152,19 +148,19 @@ ALTER TABLE `table_user`
 -- AUTO_INCREMENT for table `table_kendaraan`
 --
 ALTER TABLE `table_kendaraan`
-  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `table_pelanggan`
 --
 ALTER TABLE `table_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `table_servis`
 --
 ALTER TABLE `table_servis`
-  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `table_user`
