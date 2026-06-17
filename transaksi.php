@@ -30,6 +30,14 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'proses') {
     exit;
 }
 
+// PROSES HAPUS/BATALKAN SERVIS (DELETE)
+if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus_servis') {
+    $id_servis = $_GET['id'];
+    mysqli_query($conn, "DELETE FROM table_servis WHERE id_servis = '$id_servis'");
+    header("Location: transaksi.php");
+    exit;
+}
+
 // 3. PROSES UPDATE SELESAI SERVIS (DIPROSES -> SELESAI)
 if (isset($_POST['servis_selesai'])) {
     $id_servis        = $_POST['id_servis'];
@@ -148,17 +156,20 @@ if (isset($_POST['servis_selesai'])) {
                                                     <span class="bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-semibold">Selesai</span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td class="py-4 px-4 text-center">
+                                            <td class="py-4 px-4 text-center space-y-1">
                                                 <?php if($s['status_servis'] == 'Antre'): ?>
-                                                    <a href="transaksi.php?aksi=proses&id=<?= $s['id_servis']; ?>" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition shadow-sm">
+                                                    <a href="transaksi.php?aksi=proses&id=<?= $s['id_servis']; ?>" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition shadow-sm text-center">
                                                         Proses Mekanik
                                                     </a>
+                                                    <a href="transaksi.php?aksi=hapus_servis&id=<?= $s['id_servis']; ?>" onclick="return confirm('Batalkan antrean servis ini?')" class="block w-full bg-red-50 text-red-600 hover:bg-red-600 hover:text-white text-xs px-3 py-1.5 rounded-lg font-medium transition text-center">
+                                                        ❌ Batalkan
+                                                    </a>
                                                 <?php elseif($s['status_servis'] == 'Diproses'): ?>
-                                                    <button onclick="bukaModal(<?= $s['id_servis']; ?>)" class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition shadow-sm">
+                                                    <button onclick="bukaModal(<?= $s['id_servis']; ?>)" class="w-full bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition shadow-sm">
                                                         Selesai Servis
                                                     </button>
                                                 <?php else: ?>
-                                                    <a href="cetak_nota.php?id=<?= $s['id_servis']; ?>" target="_blank" class="border border-gray-300 hover:bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium transition inline-flex items-center gap-1">
+                                                    <a href="cetak_nota.php?id=<?= $s['id_servis']; ?>" target="_blank" class="w-full border border-gray-300 hover:bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium transition inline-flex items-center justify-center gap-1">
                                                         🖨️ Nota
                                                     </a>
                                                 <?php endif; ?>

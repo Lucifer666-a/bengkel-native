@@ -2,6 +2,20 @@
 // 1. Mengikutkan header untuk proteksi session dan koneksi database
 include 'components/header.php';
 
+// PROSES HAPUS PELANGGAN (DELETE)
+if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus_pelanggan') {
+    $id_pelanggan = $_GET['id'];
+    
+    // Karena table_kendaraan terhubung dengan Foreign Key 'ON DELETE CASCADE',
+    // menghapus data di table_pelanggan otomatis akan ikut menghapus data motornya di table_kendaraan!
+    $query_hapus = mysqli_query($conn, "DELETE FROM table_pelanggan WHERE id_pelanggan = '$id_pelanggan'");
+    
+    if ($query_hapus) {
+        header("Location: pelanggan.php");
+        exit;
+    }
+}
+
 $notif_sukses = "";
 $notif_gagal  = "";
 
@@ -172,12 +186,16 @@ if (isset($_GET['cari'])) {
                                                     <?= $row['no_plat']; ?>
                                                 </span>
                                             </td>
-                                            <td class="py-3.5 px-4 text-gray-600"><?= $row['merk_tipe']; ?></td>
-                                            <td class="py-3.5 px-4 text-center">
-                                              <a href="transaksi.php?id_kendaraan=<?= $row['id_kendaraan']; ?>" 
+                                            <td class="py-3.5 px-4 text-center space-x-1">
+                                                <a href="transaksi.php?id_kendaraan=<?= $row['id_kendaraan']; ?>" 
                                                 class="inline-block bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-3 py-1.5 rounded-lg text-xs transition shadow-sm">
-                                                  + Masuk Antrean
-                                              </a>
+                                                    + Masuk Antrean
+                                                </a>
+                                                <a href="pelanggan.php?aksi=hapus_pelanggan&id=<?= $row['id_pelanggan']; ?>" 
+                                                onclick="return confirm('Hapus pelanggan ini? Data kendaraan mereka juga akan ikut terhapus!')"
+                                                class="inline-block bg-red-50 text-red-600 hover:bg-red-600 hover:text-white font-semibold px-3 py-1.5 rounded-lg text-xs transition shadow-sm">
+                                                    🗑️ Hapus
+                                                </a>
                                             </td>
                                         </tr>
                                         <?php
