@@ -6,8 +6,6 @@ include 'components/header.php';
 if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus_pelanggan') {
     $id_pelanggan = $_GET['id'];
     
-    // Karena table_kendaraan terhubung dengan Foreign Key 'ON DELETE CASCADE',
-    // menghapus data di table_pelanggan otomatis akan ikut menghapus data motornya di table_kendaraan!
     $query_hapus = mysqli_query($conn, "DELETE FROM table_pelanggan WHERE id_pelanggan = '$id_pelanggan'");
     
     if ($query_hapus) {
@@ -19,29 +17,22 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus_pelanggan') {
 $notif_sukses = "";
 $notif_gagal  = "";
 
-// =========================================================================
-// 2. PROSES INPUT DATA PELANGGAN & KENDARAAN BARU (CREATE)
-// =========================================================================
 if (isset($_POST['tambah_pelanggan'])) {
     $nama_pelanggan = htmlspecialchars($_POST['nama_pelanggan']);
     $no_hp          = htmlspecialchars($_POST['no_hp']);
-    $no_plat        = strtoupper(str_replace(' ', '', $_POST['no_plat'])); // Format plat otomatis tanpa spasi & huruf kapital
-    $tipe_motor     = htmlspecialchars($_POST['tipe_motor']); // Ini menangkap input merk/tipe motor
+    $no_plat        = strtoupper(str_replace(' ', '', $_POST['no_plat']));
+    $tipe_motor     = htmlspecialchars($_POST['tipe_motor']);
 
-    // Cek dulu apakah nomor plat sudah pernah terdaftar di table_kendaraan atau belum
     $cek_plat = mysqli_query($conn, "SELECT * FROM table_kendaraan WHERE no_plat = '$no_plat'");
     
     if (mysqli_num_rows($cek_plat) > 0) {
         $notif_gagal = "Gagal! Nomor plat kendaraan $no_plat sudah terdaftar di sistem.";
     } else {
-        // LANGKAH 1: Masukkan data pemilik ke table_pelanggan terlebih dahulu
         $query_pelanggan = "INSERT INTO table_pelanggan (nama_pelanggan, no_hp) VALUES ('$nama_pelanggan', '$no_hp')";
         
         if (mysqli_query($conn, $query_pelanggan)) {
-            // Ambil id_pelanggan yang baru saja digenerate otomatis oleh MySQL
             $id_pelanggan_baru = mysqli_insert_id($conn);
 
-            // LANGKAH 2: Masukkan data motor ke table_kendaraan (SUDAH DISESUAIKAN ke merk_tipe & tahun_keluaran)
             $tahun_sekarang = date('Y');
             $query_kendaraan = "INSERT INTO table_kendaraan (id_pelanggan, no_plat, merk_tipe, tahun_keluaran) 
                                 VALUES ('$id_pelanggan_baru', '$no_plat', '$tipe_motor', '$tahun_sekarang')";
@@ -57,9 +48,6 @@ if (isset($_POST['tambah_pelanggan'])) {
     }
 }
 
-// =========================================================================
-// 3. PROSES PENCARIAN (READ)
-// =========================================================================
 $keyword = "";
 if (isset($_GET['cari'])) {
     $keyword = mysqli_real_escape_string($conn, $_GET['keyword']);
